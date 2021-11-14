@@ -13,17 +13,23 @@ class PollSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     title_p = serializers.CharField(max_length=56)
     desc_p = serializers.CharField(max_length=255)
-    s_date = serializers.DateTimeField(read_only=True)
-    e_date = serializers.DateTimeField()
+    s_date = serializers.DateTimeField(read_only=True, input_formats=['%Y-%m-%d',])
+    e_date = serializers.DateTimeField(input_formats=['%Y-%m-%d',])
 
     def create(self, validated_data):
         return Polls.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        for key, value in validated_data.items():
+            setattr(instance, key, value)
+        instance.save()
+        return instance
 
 
 class QuestionSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     descriptionQA = serializers.CharField(max_length=255)
-    typeQA = serializers.CharField(max_length=55)
+    typeQA = serializers.CharField(max_length=55, read_only=True)
 
     def create(self, validated_data):
         return Question.objects.create(**validated_data)

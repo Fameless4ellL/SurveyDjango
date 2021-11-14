@@ -1,33 +1,257 @@
 <!-- GETTING STARTED -->
-## Getting Started
+## Installation
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+* clone
+```sh
+  git clone https://github.com/Fameless4ellL/SurveyDjango.git
+```
+* install 
+```sh
+  pip install -r requirements.txt
+```
+* run
+```sh
+  py manage.py runserver
+```
+<!--### Docker
 
-### Prerequisites
+ TODO
+-->
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
-### Installation
+**API**
+----
+  Additional information about API call.
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+* **URL**
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+  /api/polls/<_poll_id_>
 
+* **Method:**
+
+  `GET` | `POST` | `DELETE` | `PATCH`
+  
+*  **URL Params** 
+
+   **Required:**
+ 
+   None
+
+   **Optional:**
+ 
+   `id=[integer]`
+   
+
+* **Data Params**
+
+  `id=[integer]` `title_p=[string]` `desc_p=[string]` `s_date=[date]` `e_date=[date]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ id : 1 }`
+    
+  OR
+  
+  * **Code:** 204 <br />
+  
+  OR
+  
+  * **Code:** 201 <br />
+    **Content:** `{
+        "title_p": "title_p",
+        "desc_p": "desc_p",
+        "s_date": "%Y-%m-%d",
+        "e_date": "%Y-%m-%d"
+    }`
+ 
+* **Error Response:**
+
+  * **Code:** 400 Bad Request <br />
+    **Content:** `{
+    "title_p": [
+        "This field is required."
+    ],
+    "desc_p": [
+        "This field is required."
+    ],
+    "e_date": [
+        "This field is required."
+    ]
+}`
+
+  OR
+
+  * **Code:** 404 Not Found <br />
+    **Content:** `{
+    "detail": "Not found."
+}`
+
+----
+
+
+* **URL**
+
+  /api/polls/questions/<_int:question_id_>
+
+* **Method:**
+
+  `GET` | `DELETE` | `PATCH`
+  
+*  **URL Params** 
+
+   **Required:**
+ 
+   None
+
+   **Optional:**
+ 
+   `id=[integer]`
+   
+
+* **Data Params**
+
+  `id=[integer]` `descriptionQA=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ id : 1 }`
+    
+  OR
+  
+  * **Code:** 204 <br />
+  
+ 
+* **Error Response:**
+
+  * **Code:** 404 Not Found <br />
+    **Content:** `{
+    "detail": "Not found."
+}`
+
+----
+
+* **URL**
+
+  /api/polls/questions/<_int:question_id_>/choices/
+
+* **Method:**
+
+  `POST` 
+  
+*  **URL Params** 
+
+   **Required:**
+ 
+   `id=[integer]`
+
+   **Optional:**
+ 
+   None
+   
+
+* **Data Params**
+
+  `choice_text=[string]`
+
+* **Success Response:**
+
+  * **Code:** 201 <br />
+    **Content:** `{ choice_text : str }`
+    
+  OR
+  
+  * **Code:** 204 <br />
+  
+ 
+* **Error Response:**
+
+  * **Code:** 400 Bad Request <br />
+    **Content:** `{
+    "choice_text": [
+        "This field is required."
+    ]
+}`
+
+    OR
+    
+  * **Code:** 404 Not Found <br />
+
+----
+
+* **URL**
+
+  /api/polls/questions/<_int:question_id_>/vote/
+
+* **Method:**
+
+  `PATCH` 
+  
+*  **URL Params** 
+
+   **Required:**
+ 
+   `id=[integer]`
+
+   **Optional:**
+ 
+   None
+   
+
+* **Data Params**
+
+  `choice_id=[int]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ choice_id : int }`
+  
+ 
+* **Error Response:**
+
+  * **Code:** 400 Bad Request <br />
+    **Content:** `{
+    "choice_id": [
+        "This field is required."
+    ]
+}`
+
+    OR
+    
+  * **Code:** 404 Not Found <br />
+
+----
+
+* **URL**
+
+  /api/polls/questions/<_int:question_id_>/result/
+
+* **Method:**
+
+  `GET` 
+  
+*  **URL Params** 
+
+   **Required:**
+ 
+   `id=[integer]`
+
+   **Optional:**
+ 
+   None
+
+* **Data Params**
+
+   None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    
+* **Error Response:**
+   
+  * **Code:** 404 Not Found <br />
+  
 <p align="right">(<a href="#top">back to top</a>)</p>

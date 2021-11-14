@@ -4,7 +4,7 @@ from django.db import models
 
 
 class TypeQA(models.Model):
-    tpe = models.CharField('тип вопроса', max_length=256)
+    tpe = models.CharField('тип вопроса', max_length=256, default=None)
 
     def __str__(self):
         return self.tpe
@@ -35,7 +35,7 @@ class Choice(models.Model):
 class Polls(models.Model):
     title_p = models.CharField('Тема', max_length=56, blank=True)
     desc_p = models.CharField('Описание', max_length=255, blank=True)
-    QA = models.ManyToManyField(Question, help_text="Вопросы", blank=True)
+    QA = models.ManyToManyField(Question, help_text="Вопросы", blank=True, default=None)
     s_date = models.DateTimeField()
     e_date = models.DateTimeField()
 

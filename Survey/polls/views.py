@@ -17,31 +17,14 @@ from .serializers import QuestionSerializer, ChoiceSerializer, VoteSerializer, Q
 def questions_view(request):
     if request.method == 'GET':
         return HttpResponse("Not Implemented")
-    elif request.method == 'POST':
-        descriptionQA = request.POST['descriptionQA']
-        typeQA = request.POST['typeQA']
-        # start_date = datetime.strptime(request.POST['start_date'], '%Y-%m-%d')
-        # end_date = datetime.strptime(request.POST['end_date'], '%Y-%m-%d')
-        Question.objects.create(descriptionQA=descriptionQA, typeQA=typeQA)
-        return HttpResponse("Question created", status=201)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def questions_view(request):
     if request.method == 'GET':
         questions = Question.objects.all()
         serializer = QuestionSerializer(questions, many=True)
         return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = QuestionSerializer(data=request.data)
-        if serializer.is_valid():
-            descriptionQA = request.data['descriptionQA']
-            typeQA = request.data['typeQA']
-            # start_date = datetime.strptime(request.data['start_date'], '%Y-%m-%d')
-            # end_date = datetime.strptime(request.data['end_date'], '%Y-%m-%d')
-            Question.objects.create(descriptionQA=descriptionQA, typeQA=typeQA)
-            return HttpResponse("Question created", status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PATCH', 'DELETE'])
@@ -101,10 +84,9 @@ def polls_view(request):
         if serializer.is_valid():
             title_p = request.data['title_p']
             desc_p = request.data['desc_p']
-            QA = request.data['QA']
             start_date = datetime.strptime(request.data['s_date'], '%Y-%m-%d')
             end_date = datetime.strptime(request.data['e_date'], '%Y-%m-%d')
-            Polls.objects.create(title_p=title_p, desc_p=desc_p, s_date=start_date, e_date=end_date, QA=QA)
+            Polls.objects.create(title_p=title_p, desc_p=desc_p, s_date=start_date, e_date=end_date)
             return HttpResponse("poll created", status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
