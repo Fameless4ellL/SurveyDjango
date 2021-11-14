@@ -24,7 +24,7 @@ SECRET_KEY = '*213v*9#s&z%ro38%h-$sn9o1+4kdfm$**4b7ok=c320-pwutf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'Survey.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/Admin/Documents/SurvDjango/Survey'],
+        'DIRS': [''],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
