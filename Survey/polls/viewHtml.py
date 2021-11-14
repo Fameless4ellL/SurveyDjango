@@ -8,7 +8,7 @@ from django.template import loader
 
 def index(request):
     latest_Polls_list = Polls.objects.order_by('-s_date')
-    template = loader.get_template('polls/Template/polls/index.html')
+    template = loader.get_template('polls/index.html')
     context = {
         'latest_Polls_list': latest_Polls_list,
     }
@@ -17,7 +17,7 @@ def index(request):
 
 def detail(request, poll_id):
     latest_Polls_list = Polls.objects.filter(pk=poll_id)
-    template = loader.get_template('polls/Template/polls/detail.html')
+    template = loader.get_template('polls/detail.html')
     context = {
         'latest_Polls_list': latest_Polls_list,
     }
@@ -26,7 +26,7 @@ def detail(request, poll_id):
 
 def detail_of_details(request, poll_id, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/Template/polls/detail_of_details.html', {'question': question})
+    return render(request, 'polls/detail_of_details.html', {'question': question})
 
 
 def vote(request, question_id):
@@ -40,12 +40,12 @@ def vote(request, question_id):
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
         if Vote.objects.filter(voter=ip, choice=choice):
-            return render(request, 'polls/Template/polls/detail_of_details.html', {
+            return render(request, 'polls/detail_of_details.html', {
                 'question': question,
                 'error_message': "You are already voted.",
             })
     except (KeyError, Choice.DoesNotExist):
-        return render(request, 'polls/Template/polls/detail_of_details.html', {
+        return render(request, 'polls/detail_of_details.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
         })
@@ -58,4 +58,4 @@ def vote(request, question_id):
 
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/Template/polls/results.html', {'question': question})
+    return render(request, 'polls/results.html', {'question': question})
