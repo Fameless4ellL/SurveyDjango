@@ -1,6 +1,7 @@
 <!-- GETTING STARTED -->
 ## Installation
 
+* Create venv
 * clone
 ```sh
   git clone https://github.com/Fameless4ellL/SurveyDjango.git
@@ -240,7 +241,7 @@
 
    **Optional:**
  
-   None
+   None     
 
 * **Data Params**
 
