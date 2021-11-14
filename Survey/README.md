@@ -1,7 +1,7 @@
 <!-- GETTING STARTED -->
 ## Installation
 
-##local
+### local
 
 * Create venv
 * clone
@@ -16,7 +16,7 @@
 ```sh
   py manage.py runserver
 ```
-## Docker
+### Docker
 * clone
 ```sh
   git clone https://github.com/Fameless4ellL/SurveyDjango.git
